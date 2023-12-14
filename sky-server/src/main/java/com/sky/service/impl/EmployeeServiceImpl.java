@@ -55,4 +55,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        //对象属性拷贝
+    }
 }
