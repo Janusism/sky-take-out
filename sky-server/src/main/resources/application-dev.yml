@@ -11,3 +11,8 @@ sky:
     access-key-id: LTAI5tSHK4Fj6sLhp38iMf6H
     access-key-secret: dtINH693Q2OeAOxeI54Yu4BhBy8N8k
     bucket-name: xuanyuy
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 10
