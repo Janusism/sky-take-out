@@ -19,5 +19,5 @@ sky:
   wechat:
     appid: wx3ef64e657f266102
     secret: a297f37e72101aab4a979a8bae882c2b
-    notifyUrl: http://39885c61.r15.cpolar.top -> http://localhost:8080
-    refundNotifyUrl: https://39885c61.r15.cpolar.top -> http://localhost:8080
+    notifyUrl: http://3de985e.r10.cpolar.top -> http://localhost:8080
+    refundNotifyUrl: https://3de985e.r10.cpolar.top -> http://localhost:8080
