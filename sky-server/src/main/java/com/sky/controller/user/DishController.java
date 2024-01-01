@@ -23,6 +23,7 @@ import java.util.List;
 public class DishController {
     @Autowired
     private DishService dishService;
+
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -35,27 +36,23 @@ public class DishController {
     @GetMapping("/list")
     @ApiOperation("根据分类id查询菜品")
     public Result<List<DishVO>> list(Long categoryId) {
-        //构造redis中的key，规则：dish_分类Id
         String key = "dish_" + categoryId;
-
-        //查询redis中是否存在菜品数据
+        // 查询Redis是否存在菜品数据 (放进去什么类型 取出来也是这个类型)
         List<DishVO> list = (List<DishVO>) redisTemplate.opsForValue().get(key);
-        if (list != null && list.size() >0) {
-            //如果存在,直接返回，无须查询数据库
+        // 存在 直接返回
+        if (list != null && list.size() > 0) {
             return Result.success(list);
         }
-
-
-
-        Dish dish =new Dish();
+        // 不存在 查询数据库
+        Dish dish = new Dish();
         dish.setCategoryId(categoryId);
-        dish.setStatus(StatusConstant.ENABLE);//查询起售中的菜品\
+        dish.setStatus(StatusConstant.ENABLE);// 查询起售中的菜品
 
-        //如果不存在,查询数据库，将查询到的数据放在redis中
         list = dishService.listWithFlavor(dish);
-        redisTemplate.opsForValue().set(key,list);
-
+        // 将结果存入Redis中
+        redisTemplate.opsForValue().set(key, list);
         return Result.success(list);
     }
+
 
 }

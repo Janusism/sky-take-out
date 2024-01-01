@@ -15,41 +15,28 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.UUID;
 
-/**
- * 通用接口
- */
 @RestController
 @RequestMapping("/admin/common")
-@Api(tags = "通用接口")
 @Slf4j
+@Api(tags = "通用接口")
 public class CommonController {
+
     @Autowired
     private AliOssUtil aliOssUtil;
-    /**
-     * 文件上传
-     * @param file
-     * @return
-     */
 
     @PostMapping("/upload")
     @ApiOperation("文件上传")
     public Result<String> upload(MultipartFile file){
-        log.info("文件上传：{}",file);
+        log.info("文件为: " + file);
         try {
-            //原始文件名
-            String originalFilename = file.getOriginalFilename();
-            //截取原始文件名的后缀
-            String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-
-            //构建新文件名称
-            String objectName = UUID.randomUUID().toString() + extension;
-            //文件的请求路径
-            String filePath = aliOssUtil.upload(file.getBytes(), objectName);
+            String fileOriginalFilename = file.getOriginalFilename();
+            String extension = fileOriginalFilename.substring(fileOriginalFilename.lastIndexOf("."));
+            String fileName = UUID.randomUUID() + extension;
+            String filePath = aliOssUtil.upload(file.getBytes(), fileName);
             return Result.success(filePath);
         } catch (IOException e) {
-            log.error("文件上传失败：{}",e);
+            log.error("文件上传失败: {}", e.getMessage());
         }
-
         return Result.error(MessageConstant.UPLOAD_FAILED);
     }
 }

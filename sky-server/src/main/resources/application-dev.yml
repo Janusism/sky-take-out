@@ -14,10 +14,15 @@ sky:
   redis:
     host: localhost
     port: 6379
-    password:
+    password: 
     database: 10
   wechat:
     appid: wx3ef64e657f266102
     secret: a297f37e72101aab4a979a8bae882c2b
-    notifyUrl: http://3de985e.r10.cpolar.top -> http://localhost:8080
-    refundNotifyUrl: https://3de985e.r10.cpolar.top -> http://localhost:8080
+    notifyUrl: https://396b571e.r19.cpolar.top -> http://localhost:8080
+    refundNotifyUrl: http://396b571e.r19.cpolar.top -> http://localhost:8080
+  shop:
+    address: 深圳市龙岗区龙翔大道2188号
+
+  baidu:
+    ak: 4GQxBPGqMTpryQkNlRbNdVGqKbwe9Q9N

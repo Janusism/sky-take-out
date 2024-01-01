@@ -15,13 +15,7 @@ import java.util.List;
 
 @Mapper
 public interface SetmealMapper {
-    /**
-     * 根据id修改套餐
-     *
-     * @param setmeal
-     */
-    @AutoFill(OperationType.UPDATE)
-    void update(Setmeal setmeal);
+
     /**
      * 根据分类id查询套餐的数量
      * @param id
@@ -59,7 +53,6 @@ public interface SetmealMapper {
     @Delete("delete from setmeal where id = #{id}")
     void deleteById(Long setmealId);
 
-
     /**
      * 动态条件查询套餐
      * @param setmeal
@@ -77,4 +70,3 @@ public interface SetmealMapper {
             "where sd.setmeal_id = #{setmealId}")
     List<DishItemVO> getDishItemBySetmealId(Long setmealId);
 }
-

@@ -8,20 +8,10 @@ import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface EmployeeMapper {
-
-    /**
-     * 插入员工数据
-     *
-     * @param employee
-     */
-    @Insert("insert into employee(name,username,password,phone,sex,id_number,create_time,update_time,create_user,update_user,status)" +
-            "values " +
-            "(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})")
-    @AutoFill(value = OperationType.INSERT)
-    void insert(Employee employee);
 
     /**
      * 根据用户名查询员工
@@ -32,28 +22,28 @@ public interface EmployeeMapper {
     @Select("select * from employee where username = #{username}")
     Employee getByUsername(String username);
 
-    /**
-     * 分页查询
-     *
-     * @param employeePageQueryDTO
-     * @return
-     */
+
+    @Insert("insertBatch into employee(name, username, password, phone, sex, id_number, status, create_time, update_time, create_user, update_user) VALUES " +
+            "(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser})")
+    @AutoFill(value = OperationType.INSERT)
+    void insert(Employee employee);
+
+
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
-    /**
-     * 根据主键动态修改属性
-     *
-     * @param employee
-     */
-    @AutoFill(value = OperationType.UPDATE)
-    void update(Employee employee);
+    @Select("select * from employee where id = #{id}")
+    Employee getById(String id);
 
-    /**
-     * 根据id查询员工信息
-     *
-     * @param id
-     * @return
-     */
-    @Select("select  * from employee where id = #{id}")
-    Employee getById(Long id);
+    @Update("update employee set " +
+            "username = #{username}," +
+            " name = #{name}," +
+            " phone = #{phone}," +
+            " id_number = #{idNumber}," +
+            " sex = #{sex} " +
+            "where id = #{id}")
+    int update(Employee employee);
+
+    @Update("update employee set status = #{status} where id = #{id}")
+    @AutoFill(value = OperationType.UPDATE)
+    int updateStatus(Long id, Integer status);
 }
