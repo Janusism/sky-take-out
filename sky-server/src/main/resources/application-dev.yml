@@ -19,8 +19,8 @@ sky:
   wechat:
     appid: wx3ef64e657f266102
     secret: a297f37e72101aab4a979a8bae882c2b
-    notifyUrl: https://396b571e.r19.cpolar.top -> http://localhost:8080
-    refundNotifyUrl: http://396b571e.r19.cpolar.top -> http://localhost:8080
+    notifyUrl: http://2db9d019.r18.cpolar.top -> http://localhost:8080
+    refundNotifyUrl: https://2db9d019.r18.cpolar.top -> http://localhost:8080
   shop:
     address: 深圳市龙岗区龙翔大道2188号
 
